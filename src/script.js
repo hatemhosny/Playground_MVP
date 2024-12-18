@@ -1,9 +1,11 @@
-const markup = document.getElementById('markup');
-const style = document.getElementById('style');
-const script = document.getElementById('script');
+// @ts-nocheck
+
+const markup = document.getElementById("markup");
+const style = document.getElementById("style");
+const script = document.getElementById("script");
 const editors = [markup, style, script];
-const iframe = result.querySelector('iframe');
-const labels = document.querySelectorAll('#editors label');
+const iframe = document.querySelector("iframe");
+const labels = document.querySelectorAll("#editors label");
 
 const getResult = ({ html, css, js }) => {
   return `
@@ -13,14 +15,14 @@ const getResult = ({ html, css, js }) => {
       </head>
       <body>
       ${html}
-      <script>${js}</script>
+      <script type="module">${js}</script>
       </body>
     </html>
   `;
 };
 
 editors.forEach((editor) => {
-  editor.addEventListener('input', () => {
+  editor.addEventListener("input", () => {
     const resultHTML = getResult({
       html: markup.value,
       css: style.value,
@@ -33,15 +35,15 @@ editors.forEach((editor) => {
   });
 });
 
-labels.forEach((label, index) => {
-  label.addEventListener('dblclick', () => {
-    if (label.parentElement.style.flex.startsWith('15')) {
-      label.parentElement.style.flex = '1';
+labels.forEach((label) => {
+  label.addEventListener("dblclick", () => {
+    if (label.parentElement.style.flex.startsWith("15")) {
+      label.parentElement.style.flex = "1";
     } else {
       labels.forEach((lb) => {
-        lb.parentElement.style.flex = '1';
+        lb.parentElement.style.flex = "1";
       });
-      label.parentElement.style.flex = '15';
+      label.parentElement.style.flex = "15";
     }
   });
 });
