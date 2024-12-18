@@ -15,7 +15,7 @@ const getResult = ({ html, css, js }) => {
       </head>
       <body>
       ${html}
-      <script type="module">${js}</script>
+      <script>${js}</script>
       </body>
     </html>
   `;
