@@ -7,15 +7,49 @@ const editors = [markup, style, script];
 const iframe = document.querySelector("iframe");
 const labels = document.querySelectorAll("#editors label");
 
+// https://regexr.com/8a2j7
+const importsPattern =
+  /(import\s+?(?:(?:(?:[\w*\s{},\$]*)\s+from\s+?)|))((?:".*?")|(?:'.*?'))([\s]*?(?:;|$|))/g;
+
+const getImports = (code) =>
+  [...code.matchAll(new RegExp(importsPattern))].map((arr) =>
+    arr[2].replace(/"/g, "").replace(/'/g, "")
+  );
+
+const createImportMap = (imps) => ({
+  imports: imps.reduce(
+    (acc, imp) => ({
+      ...acc,
+      [imp]: `https://esm.sh/${imp}`,
+    }),
+    {}
+  ),
+});
+
+const createImportMapScript = (importmap) => `
+<script type="importmap">
+${JSON.stringify(importmap, null, 2)}
+</script>
+`;
+
+const hasImports = (code) => getImports(code).length > 0;
+
 const getResult = ({ html, css, js }) => {
+  const importmapScript = hasImports(js)
+    ? createImportMapScript(createImportMap(getImports(js)))
+    : "";
+
+  const scriptType = hasImports(js) ? "module" : "text/javascript";
+
   return `
     <html>
       <head>
         <style>${css}</style>
+        ${importmapScript}
       </head>
       <body>
       ${html}
-      <script>${js}</script>
+      <script type="${scriptType}">${js}</script>
       </body>
     </html>
   `;
