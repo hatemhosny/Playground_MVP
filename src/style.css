@@ -32,6 +32,8 @@ body {
     border: 1px solid #eee;
 
     label {
+      background-color: #eee;
+      border: 1px solid #999;
       padding: 10px;
       text-align: center;
       cursor: pointer;
