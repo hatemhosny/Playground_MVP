@@ -40,6 +40,13 @@ body {
       font-family: sans-serif;
       user-select: none;
       flex-grow: 0;
+      white-space: nowrap;
+
+      select {
+        width: 19px;
+        margin-left: 0.5rem;
+        cursor: pointer;
+      }
     }
 
     textarea {
