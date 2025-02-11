@@ -5,11 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Playground MVP</title>
     <link rel="stylesheet" href="style.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "codemirror": "https://esm.sh/codemirror",
+          "@codemirror/state": "https://esm.sh/@codemirror/state",
+          "@codemirror/theme-one-dark": "https://esm.sh/@codemirror/theme-one-dark",
+          "@codemirror/lang-html": "https://esm.sh/@codemirror/lang-html",
+          "@codemirror/lang-markdown": "https://esm.sh/@codemirror/lang-markdown",
+          "@codemirror/lang-css": "https://esm.sh/@codemirror/lang-css",
+          "@codemirror/lang-scss": "https://esm.sh/@codemirror/lang-scss",
+          "@codemirror/lang-javascript": "https://esm.sh/@codemirror/lang-javascript",
+          "monaco-editor": "https://cdn.jsdelivr.net/npm/@live-codes/monaco-editor/monaco.js"
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="container">
       <div id="editors">
-        <div class="editor">
+        <div class="editor active">
           <label for="markup">
             <span></span>
             <select data-editorid="markup"></select>
