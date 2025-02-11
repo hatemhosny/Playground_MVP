@@ -20,9 +20,16 @@ let scriptEditor;
 let editors;
 const iframe = document.querySelector("iframe");
 const labels = document.querySelectorAll("#editors label");
-export const menus = document.querySelectorAll("#editors select");
+const menus = document.querySelectorAll("#editors select");
 
 labels.forEach((label) => {
+  label.parentElement.addEventListener("click", () => {
+    document.querySelectorAll(".editor").forEach((ed) => {
+      ed.classList.remove("active");
+    });
+    label.parentElement.classList.add("active");
+  });
+
   label.addEventListener("dblclick", () => {
     if (label.parentElement.style.flex.startsWith("15")) {
       label.parentElement.style.flex = "1";

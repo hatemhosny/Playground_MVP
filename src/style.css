@@ -4,6 +4,10 @@
   margin: 0;
 }
 
+:root {
+  --label-height: 40px;
+}
+
 html,
 body {
   height: 100%;
@@ -33,6 +37,7 @@ body {
     overflow: hidden;
 
     label {
+      height: var(--label-height);
       background-color: #eee;
       border: 1px solid #999;
       padding: 10px;
@@ -67,4 +72,31 @@ body {
     width: 100%;
     border: 0;
   }
+}
+
+@media screen and (max-width: 768px) {
+  #editors .editor:not(.active) {
+    flex: unset;
+    width: var(--label-height);
+
+    label {
+      transform: rotateZ(90deg) scaleY(-1) scaleX(-1) translateY(50%)
+        translateX(calc(-100% + (var(--label-height) / 2)));
+      transform-origin: left;
+      width: calc(50vh - 2px);
+
+      select {
+        display: none;
+      }
+    }
+
+    .code-editor {
+      display: none;
+    }
+  }
+}
+
+/* CodeMirror */
+.cm-editor {
+  height: calc(50vh - var(--label-height));
 }
